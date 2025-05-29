@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 min-h-screen flex flex-col">
+
+    <nav class="bg-blue-600 p-4 text-white flex justify-between items-center">
+        <div class="font-bold text-lg">Sistem Imunisasi</div>
+        <div>
+            <span class="mr-4">Halo, {{ request.user.username }} ({{ request.user.role }})</span>
+            <a href="{% url 'logout' %}" class="bg-red-500 hover:bg-red-600 px-3 py-1 rounded">Logout</a>
+        </div>
+    </nav>
+
+    <main class="flex-grow container mx-auto p-6">
+
+        {% if request.user.role == 'admin' %}
+            {% include 'fragment/admin_dashboard.html' %}
+
+            
+        {% else %}
+            {% include 'fragment/user_dashboard.html' %}
+        {% endif %}
+
+        <div class="bg-white rounded shadow p-4">
+            <h2 class="text-xl font-semibold mb-2">Data Imunisasi</h2>
+            <p>Konten dashboard dapat ditambahkan sesuai kebutuhan.</p>
+        </div>
+    </main>
+
+    <footer class="bg-gray-200 p-4 text-center text-gray-600">
+        &copy; 2025 Sistem Imunisasi
+    </footer>
+
+</body>
+</html>

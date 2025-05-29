@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Healthy Growth | Understanding Stunting in Children</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .hero-gradient {
+            background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+        }
+        .article-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(59, 130, 246, 0.3);
+        }
+        .interactive-image {
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        .interactive-image:hover {
+            transform: scale(1.02);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+        }
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .floating-btn {
+            animation: float 3s ease-in-out infinite;
+        }
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+    </style>
+</head>
+<body class="font-sans bg-blue-50">
+    <!-- Navigation -->
+    {% include "component/navbar.html" %}
+
+    <!-- Hero Section and Stats Section -->
+    {% include "fragment/landing/hero.html"%}
+    <!-- About Stunting Section -->
+    {% include "fragment/landing/stunting.html"%}
+    
+    <!-- Causes Section with Tabs -->
+    {% include "fragment/landing/causes.html"%}
+    
+    <!-- Prevention Section -->
+    <section id="prevention" class="py-16 bg-blue-100">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-blue-800 mb-4">Prevention Strategies</h2>
+                <div class="w-24 h-1 bg-blue-500 mx-auto"></div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-white p-8 rounded-lg shadow-lg article-hover">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-blue-100 p-3 rounded-full mr-4">
+                            <i class="fas fa-utensils text-blue-600 text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold text-blue-800">Nutrition Interventions</h3>
+                    </div>
+                    <p class="text-gray-700 mb-4">
+                        Proper nutrition during the first 1000 days is crucial for preventing stunting. Key strategies include:
+                    </p>
+                    <ul class="list-disc pl-6 text-gray-700 space-y-2">
+                        <li>Exclusive breastfeeding for the first 6 months</li>
+                        <li>Appropriate complementary feeding after 6 months</li>
+                        <li>Micronutrient supplementation (iron, zinc, vitamin A)</li>
+                        <li>Diverse diet with adequate protein and calories</li>
+                        <li>Nutrition education for caregivers</li>
+                    </ul>
+                </div>
+                
+                <div class="bg-white p-8 rounded-lg shadow-lg article-hover">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-blue-100 p-3 rounded-full mr-4">
+                            <i class="fas fa-hand-holding-medical text-blue-600 text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold text-blue-800">Health Interventions</h3>
+                    </div>
+                    <p class="text-gray-700 mb-4">
+                        Reducing infections and improving healthcare access can significantly prevent stunting:
+                    </p>
+                    <ul class="list-disc pl-6 text-gray-700 space-y-2">
+                        <li>Regular growth monitoring and check-ups</li>
+                        <li>Vaccination programs</li>
+                        <li>Treatment of infections and parasites</li>
+                        <li>Improved sanitation and hygiene practices</li>
+                        <li>Access to clean water</li>
+                    </ul>
+                </div>
+                
+                <div class="bg-white p-8 rounded-lg shadow-lg article-hover">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-blue-100 p-3 rounded-full mr-4">
+                            <i class="fas fa-home text-blue-600 text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold text-blue-800">Environmental Improvements</h3>
+                    </div>
+                    <p class="text-gray-700 mb-4">
+                        Creating a supportive environment is essential for healthy growth:
+                    </p>
+                    <ul class="list-disc pl-6 text-gray-700 space-y-2">
+                        <li>Safe housing and living conditions</li>
+                        <li>Reduction of indoor air pollution</li>
+                        <li>Access to healthcare facilities</li>
+                        <li>Food security programs</li>
+                        <li>Community education initiatives</li>
+                    </ul>
+                </div>
+                
+                <div class="bg-white p-8 rounded-lg shadow-lg article-hover">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-blue-100 p-3 rounded-full mr-4">
+                            <i class="fas fa-brain text-blue-600 text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold text-blue-800">Cognitive Stimulation</h3>
+                    </div>
+                    <p class="text-gray-700 mb-4">
+                        Mental development is closely linked to physical growth:
+                    </p>
+                    <ul class="list-disc pl-6 text-gray-700 space-y-2">
+                        <li>Responsive caregiving</li>
+                        <li>Early childhood education programs</li>
+                        <li>Play and learning activities</li>
+                        <li>Parenting education</li>
+                        <li>Reduction of stress in early childhood</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+     {% include "fragment/landing/faq.html" %}
+
+    <!-- Resources Section -->
+    <section id="resources" class="py-16 bg-blue-100">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-blue-800 mb-4">Helpful Resources</h2>
+                <div class="w-24 h-1 bg-blue-500 mx-auto"></div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-white p-6 rounded-lg shadow-lg article-hover">
+                    <div class="h-48 overflow-hidden rounded-t-lg mb-4">
+                        <img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" 
+                             alt="Health books" 
+                             class="w-full h-full object-cover interactive-image">
+                    </div>
+                    <h3 class="text-xl font-semibold text-blue-800 mb-2">Growth Monitoring Tools</h3>
+                    <p class="text-gray-700 mb-4">Download WHO growth charts and monitoring tools to track your child's development.</p>
+                    <a href="#" class="text-blue-600 font-medium hover:text-blue-800 inline-flex items-center">
+                        Download Now <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+                
+                <div class="bg-white p-6 rounded-lg shadow-lg article-hover">
+                    <div class="h-48 overflow-hidden rounded-t-lg mb-4">
+                        <img src="https://images.unsplash.com/photo-1505751172876-fa1923c5c528?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" 
+                             alt="Doctor with child" 
+                             class="w-full h-full object-cover interactive-image">
+                    </div>
+                    <h3 class="text-xl font-semibold text-blue-800 mb-2">Nutrition Guides</h3>
+                    <p class="text-gray-700 mb-4">Comprehensive guides on age-appropriate nutrition from infancy through early childhood.</p>
+                    <a href="#" class="text-blue-600 font-medium hover:text-blue-800 inline-flex items-center">
+                        View Guides <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+                
+                <div class="bg-white p-6 rounded-lg shadow-lg article-hover">
+                    <div class="h-48 overflow-hidden rounded-t-lg mb-4">
+                        <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" 
+                             alt="Support group" 
+                             class="w-full h-full object-cover interactive-image">
+                    </div>
+                    <h3 class="text-xl font-semibold text-blue-800 mb-2">Support Organizations</h3>
+                    <p class="text-gray-700 mb-4">Connect with local and international organizations working to prevent childhood stunting.</p>
+                    <a href="#" class="text-blue-600 font-medium hover:text-blue-800 inline-flex items-center">
+                        Find Support <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="py-16 bg-blue-800 text-white">
+        <div class="container mx-auto px-4 max-w-4xl text-center">
+            <h2 class="text-3xl md:text-4xl font-bold mb-6">Stay Informed About Child Health</h2>
+            <p class="text-xl mb-8 opacity-90">Subscribe to our newsletter for the latest research and tips on preventing stunting and promoting healthy growth.</p>
+            
+            <form class="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
+                <input type="email" placeholder="Your email address" class="flex-grow px-4 py-3 rounded-lg text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <button type="submit" class="bg-white text-blue-600 px-6 py-3 rounded-lg font-semibold hover:bg-blue-100 transition">Subscribe</button>
+            </form>
+            
+            <p class="mt-4 text-sm opacity-80">We respect your privacy. Unsubscribe at any time.</p>
+        </div>
+    </section>
+
+    {% include "component/footer.html" %}
+
+    <!-- Floating action button -->
+    <div class="fixed bottom-8 right-8">
+        <a href="#home" class="floating-btn bg-blue-600 text-white w-14 h-14 rounded-full flex items-center justify-center shadow-lg hover:bg-blue-700 transition">
+            <i class="fas fa-arrow-up text-xl"></i>
+        </a>
+    </div>
+
+    <script>
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-button').addEventListener('click', function() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        });
+
+        // Accordion functionality
+        const accordionBtns = document.querySelectorAll('.accordion-btn');
+        accordionBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                this.querySelector('i').classList.toggle('rotate-180');
+                const content = this.nextElementSibling;
+                if (content.style.maxHeight) {
+                    content.style.maxHeight = null;
+                } else {
+                    content.style.maxHeight = content.scrollHeight + 'px';
+                }
+            });
+        });
+
+        // Tab functionality
+        const tabBtns = document.querySelectorAll('.tab-btn');
+        const tabContents = document.querySelectorAll('.tab-content');
+        
+        tabBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                // Remove active class from all buttons and contents
+                tabBtns.forEach(btn => {
+                    btn.classList.remove('active');
+                    btn.classList.remove('border-b-2', 'border-blue-600');
+                });
+                tabContents.forEach(content => content.classList.remove('active'));
+                
+                // Add active class to clicked button and corresponding content
+                this.classList.add('active', 'border-b-2', 'border-blue-600');
+                const tabId = this.getAttribute('data-tab');
+                document.getElementById(tabId).classList.add('active');
+            });
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile menu if open
+                    const mobileMenu = document.getElementById('mobile-menu');
+                    if (!mobileMenu.classList.contains('hidden')) {
+                        mobileMenu.classList.add('hidden');
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>

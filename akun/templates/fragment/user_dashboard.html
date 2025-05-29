@@ -1,0 +1,70 @@
+<main class="max-w-4xl mx-auto py-10 px-6">
+  <div class="bg-white rounded shadow border p-6">
+    
+    <div class="flex items-center justify-between mb-4">
+      <h3 class="text-xl font-semibold">Daftar Jadwal Imunisasi</h3>
+      <a href="{% url 'tambah_jadwal' %}" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 transition">
+        + Tambah Jadwal
+      </a>
+    </div>
+
+    {% if jadwal_list %}
+<table class="min-w-full bg-white rounded-lg shadow overflow-hidden">
+  <thead class="bg-blue-100 text-blue-700 text-sm uppercase">
+    <tr>
+      <th class="px-4 py-3 text-left">#</th>
+      <th class="px-4 py-3 text-left">Nama Anak</th>
+      <th class="px-4 py-3 text-left">Jenis Imunisasi</th>
+      <th class="px-4 py-3 text-left">Tanggal</th>
+      <th class="px-4 py-3 text-left">Keterangan</th>
+      <th class="px-4 py-3 text-left">Status</th>
+      <th class="px-4 py-3 text-left">Aksi</th>
+    </tr>
+  </thead>
+  <tbody class="divide-y divide-gray-200">
+    {% for item in jadwal_list %}
+    <tr class="hover:bg-blue-50 transition">
+      <td class="px-4 py-3">{{ forloop.counter }}</td>
+      <td class="px-4 py-3">{{ user.username }}</td>
+      <td class="px-4 py-3">{{ item.jenis_imunisasi }}</td>
+      <td class="px-4 py-3">{{ item.tanggal }}</td>
+      <td class="px-4 py-3">{{ item.keterangan|default:"-" }}</td>
+      <td class="px-4 py-3">
+        {% if item.selesai %}
+        <span class="text-green-600 font-semibold">Selesai</span>
+        {% else %}
+        <span class="text-yellow-500 font-semibold">Belum</span>
+        {% endif %}
+      </td>
+      <td class="px-4 py-3">
+        <div class="flex items-center space-x-3">
+          <!-- Ikon Buku Catatan (Edit) -->
+          <a href="{% url 'edit_jadwal' item.id %}" title="Edit" class="flex items-center justify-center">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-yellow-500 hover:text-yellow-600" viewBox="0 0 20 20" fill="currentColor">
+              <path d="M4 2a2 2 0 00-2 2v12a2 2 0 002 2h12a1 1 0 000-2H4V4a1 1 0 011-1h11a1 1 0 100-2H5a2 2 0 00-1 .27z" />
+              <path d="M8 6h5a1 1 0 100-2H8a1 1 0 000 2zm0 4h5a1 1 0 100-2H8a1 1 0 000 2zm0 4h3a1 1 0 100-2H8a1 1 0 000 2z" />
+            </svg>
+          </a>
+
+          <!-- Ikon Tempat Sampah (Hapus) -->
+          <form action="{% url 'hapus_jadwal' item.id %}" method="post" onsubmit="return confirm('Yakin ingin menghapus?')" class="flex items-center justify-center">
+            {% csrf_token %}
+            <button type="submit" title="Hapus" class="p-0 m-0">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-red-500 hover:text-red-600" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H3.5a.5.5 0 000 1H4v11a2 2 0 002 2h8a2 2 0 002-2V5h.5a.5.5 0 000-1H15V3a1 1 0 00-1-1H6zm1 4a.5.5 0 011 0v8a.5.5 0 01-1 0V6zm4 .5a.5.5 0 00-1 0v8a.5.5 0 001 0v-8z" clip-rule="evenodd" />
+              </svg>
+            </button>
+          </form>
+        </div>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+    {% else %}
+      <p class="p-4 text-center text-gray-500">Belum ada jadwal.</p>
+    {% endif %}
+
+  </div>
+</main>
