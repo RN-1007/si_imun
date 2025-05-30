@@ -19,6 +19,7 @@ urlpatterns = [
     path('jadwal/tambah/', views.tambah_jadwal, name='tambah_jadwal'),
     path('jadwal/edit/<int:jadwal_id>/', views.edit_jadwal, name='edit_jadwal'),
     path('jadwal/hapus/<int:jadwal_id>/', views.hapus_jadwal, name='hapus_jadwal'),
-   
+    path('dashboard/users/delete/<int:user_id>/', views.delete_user, name='delete_user'),
+    
 
 ]

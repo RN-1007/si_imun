@@ -69,13 +69,15 @@ def logout_view(request):
 def register_view(request):
     if request.method == 'POST':
         username = request.POST['username']
+        nama = request.POST['nama']  # ambil dari input
         password = request.POST['password']
 
         if User.objects.filter(username=username).exists():
             messages.error(request, 'Username sudah digunakan.')
         else:
             user = User.objects.create_user(username=username, password=password)
-            user.role = 'user'  # default role
+            user.nama = nama  # simpan ke field model
+            user.role = 'user'  # set default role
             user.save()
             messages.success(request, 'Registrasi berhasil. Silakan login.')
             return redirect('login')
@@ -93,6 +95,18 @@ def toggle_user_status(request, user_id):
         user.save()
 
     return redirect('dashboard') 
+def delete_user(request, user_id):
+    if request.method == 'POST':
+        if request.user.is_authenticated and request.user.is_superuser:
+            user = get_object_or_404(User, id=user_id)
+            if user != request.user:
+                user.delete()
+                messages.success(request, 'User berhasil dihapus.')
+            else:
+                messages.error(request, 'Tidak bisa menghapus akun Anda sendiri.')
+        else:
+            messages.error(request, 'Tidak punya izin.')
+    return redirect('dashboard')
 
 
 

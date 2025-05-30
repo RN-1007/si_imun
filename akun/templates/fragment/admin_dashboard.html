@@ -1,48 +1,67 @@
 <!-- Tabel daftar user untuk admin -->
 <div class="mt-6">
     <h2 class="text-xl font-semibold mb-4">Daftar Pengguna</h2>
-    <table class="min-w-full bg-white border border-gray-300 rounded shadow">
+    <table class="table-fixed min-w-full bg-white border border-gray-300 rounded shadow">
         <thead>
             <tr class="bg-gray-100 text-left text-sm uppercase text-gray-600">
-                <th class="py-2 px-4 border-b">No</th>
-                <th class="py-2 px-4 border-b">Username</th>
-                <th class="py-2 px-4 border-b">Nama</th>
-                <th class="py-2 px-4 border-b">Role</th>
-                <th class="py-2 px-4 border-b">Status</th>
-                <th class="py-2 px-4 border-b">Aksi</th>
+                <th class="w-10 py-2 px-4 border-b">No</th>
+                <th class="w-32 py-2 px-4 border-b">Username</th>
+                <th class="w-40 py-2 px-4 border-b">Nama</th>
+                <th class="w-28 py-2 px-4 border-b">Role</th>
+                <th class="w-28 py-2 px-4 border-b">Status</th>
+                <th class="w-64 py-2 px-4 border-b">Aksi</th>
             </tr>
         </thead>
         <tbody>
             {% for user in users %}
-                <tr class="border-t hover:bg-gray-50">
-                    <td class="py-2 px-4">{{ forloop.counter }}</td>
-                    <td class="py-2 px-4">{{ user.username }}</td>
-                    <td class="py-2 px-4">{{ user.nama }}</td>
-                    <td class="py-2 px-4">{{ user.role }}</td>
-                    <td class="py-2 px-4">
-                        {% if user.is_active %}
-                            <span class="text-green-600 font-semibold">Aktif</span>
-                        {% else %}
-                            <span class="text-red-600 font-semibold">Nonaktif</span>
-                        {% endif %}
-                    </td>
-                    <td class="py-2 px-4">
-                        {% if user != request.user %}
-                            <form action="{% url 'toggle_user_status' user.id %}" method="post" class="inline">
-                                {% csrf_token %}
-                                {% if user.is_active %}
-                                    <button type="submit" class="bg-yellow-500 hover:bg-yellow-600 text-white px-3 py-1 rounded text-sm">Nonaktifkan</button>
-                                {% else %}
-                                    <button type="submit" class="bg-green-500 hover:bg-green-600 text-white px-3 py-1 rounded text-sm">Aktifkan</button>
-                                {% endif %}
-                            </form>
-                        {% else %}
-                            <span class="text-gray-500 text-sm">Akun Anda</span>
-                        {% endif %}
-                    </td>
-                </tr>
+            <tr class="border-t hover:bg-gray-50">
+                <td class="py-2 px-4">{{ forloop.counter }}</td>
+                <td class="py-2 px-4">{{ user.username }}</td>
+                <td class="py-2 px-4">{{ user.nama }}</td>
+                <td class="py-2 px-4">{{ user.role }}</td>
+                <td class="py-2 px-4">
+                    {% if user.is_active %}
+                        <span class="text-green-600 font-semibold">Aktif</span>
+                    {% else %}
+                        <span class="text-red-600 font-semibold">Nonaktif</span>
+                    {% endif %}
+                </td>
+                <td class="py-2 px-4 whitespace-nowrap">
+                    {% if user != request.user %}
+                        <!-- Tombol Aktif/Nonaktif -->
+                        <form action="{% url 'toggle_user_status' user.id %}" method="post" class="inline">
+                            {% csrf_token %}
+                            {% if user.is_active %}
+                                <button type="submit"
+                                    class="w-28 text-sm bg-yellow-500 hover:bg-yellow-600 text-white px-3 py-1 rounded font-medium">
+                                    Nonaktifkan
+                                </button>
+                            {% else %}
+                                <button type="submit"
+                                    class="w-28 text-sm bg-green-500 hover:bg-green-600 text-white px-3 py-1 rounded font-medium">
+                                    Aktifkan
+                                </button>
+                            {% endif %}
+                        </form>
+
+                        <!-- Tombol Hapus -->
+                        <form action="{% url 'delete_user' user.id %}" method="post" class="inline ml-1"
+                            onsubmit="return confirm('Yakin ingin menghapus pengguna ini?');">
+                            {% csrf_token %}
+                            <button type="submit"
+                                class="w-28 text-sm bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded font-medium">
+                                Hapus
+                            </button>
+                        </form>
+                    {% else %}
+                        <span class="text-gray-500 text-sm">Akun Anda</span>
+                    {% endif %}
+                </td>
+            </tr>
             {% empty %}
-                <tr><td colspan="6" class="py-4 px-4 text-center">Belum ada pengguna.</td></tr>
+            <tr>
+                <td colspan="6" class="py-4 px-4 text-center">Belum ada pengguna.</td>
+            </tr>
             {% endfor %}
         </tbody>
     </table>
