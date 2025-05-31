@@ -1,5 +1,5 @@
 <!-- Tabel daftar user untuk admin -->
-<div class="mt-6">
+<div class="mt-6 px-16">
     <h2 class="text-xl font-semibold mb-4">Daftar Pengguna</h2>
     <table class="table-fixed min-w-full bg-white border border-gray-300 rounded shadow">
         <thead>
@@ -53,6 +53,10 @@
                                 Hapus
                             </button>
                         </form>
+
+                        <a href="{% url 'view_user_jadwal' user.id %}" class="inline-block w-28 text-sm bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded font-medium mb-1">
+                             Lihat Jadwal
+                        </a>
                     {% else %}
                         <span class="text-gray-500 text-sm">Akun Anda</span>
                     {% endif %}

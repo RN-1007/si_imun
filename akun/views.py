@@ -95,6 +95,7 @@ def toggle_user_status(request, user_id):
         user.save()
 
     return redirect('dashboard') 
+
 def delete_user(request, user_id):
     if request.method == 'POST':
         if request.user.is_authenticated and request.user.is_superuser:
@@ -107,6 +108,19 @@ def delete_user(request, user_id):
         else:
             messages.error(request, 'Tidak punya izin.')
     return redirect('dashboard')
+
+def view_user_jadwal(request, user_id):
+    if request.user.role != 'admin':
+        return HttpResponseForbidden("Hanya admin yang dapat melihat jadwal pengguna lain.")
+    
+    user = get_object_or_404(User, id=user_id)
+    jadwal_list = JadwalImunisasi.objects.filter(user=user).order_by('-tanggal')
+
+    context = {
+        'target_user': user,
+        'jadwal_list': jadwal_list,
+    }
+    return render(request, 'page/jadwal_user.html', context)
 
 
 
@@ -142,3 +156,8 @@ def hapus_jadwal(request, jadwal_id):
         jadwal.delete()
         return redirect('dashboard')
     return render(request, 'page/konfirmasi_hapus.html', {'jadwal': jadwal})
+def toggle_status(request, jadwal_id):
+    jadwal = get_object_or_404(JadwalImunisasi, id=jadwal_id, user=request.user)
+    jadwal.selesai = not jadwal.selesai
+    jadwal.save()
+    return redirect(request.META.get('HTTP_REFERER', 'dashboard'))

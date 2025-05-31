@@ -12,12 +12,6 @@
         <form method="post" class="space-y-4">
             {% csrf_token %}
 
-            <div>
-                <label for="nama_anak" class="block text-sm font-medium text-gray-700">Nama Anak</label>
-                <input type="text" name="nama_anak" id="nama_anak"
-                       value="{{ form.nama_anak.value|default_if_none:'' }}"
-                       class="w-full px-4 py-2 border rounded focus:ring focus:ring-blue-200">
-            </div>
 
             <div>
                 <label for="jenis_imunisasi" class="block text-sm font-medium text-gray-700">Jenis Imunisasi</label>
@@ -39,7 +33,11 @@
                           class="w-full px-4 py-2 border rounded focus:ring focus:ring-blue-200">{{ form.keterangan.value|default_if_none:'' }}</textarea>
             </div>
 
-            <div class="flex justify-end">
+            <div class="flex justify-end space-x-2">
+                <a href="{% url 'dashboard' %}" 
+                   class="bg-gray-300 text-gray-700 px-4 py-2 rounded hover:bg-gray-400 transition">
+                    Batal
+                </a>
                 <button type="submit"
                         class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition">
                     Simpan
