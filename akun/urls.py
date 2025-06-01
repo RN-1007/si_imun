@@ -4,6 +4,7 @@ from .views import dashboard_view
 from .views import logout_view
 from .views import register_view
 from .views import landing_view
+from .views import about_view
 
 from . import views
 
@@ -11,6 +12,7 @@ from . import views
 
 urlpatterns = [
     path('', landing_view, name='landing'),  
+    path('about/', about_view, name='about'),  
     path('login/', login_view, name='login'),
     path('dashboard/', dashboard_view, name='dashboard'),
     path('logout/', logout_view, name='logout'),

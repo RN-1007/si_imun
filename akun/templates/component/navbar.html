@@ -5,10 +5,8 @@
                 <span class="text-xl font-bold text-blue-800">HealthyGrowth</span>
             </div>
             <div class="hidden md:flex space-x-4">
-                <a href="#home" class="text-blue-600 font-medium hover:text-blue-800 hover:bg-blue-100 rounded px-2 py-1 transition">Home</a>
-                <a href="#about" class="text-blue-600 font-medium hover:text-blue-800 hover:bg-blue-100 rounded px-2 py-1 transition">About Stunting</a>
-                <a href="#prevention" class="text-blue-600 font-medium hover:text-blue-800 hover:bg-blue-100 rounded px-2 py-1 transition">Prevention</a>
-                <a href="#resources" class="text-blue-600 font-medium hover:text-blue-800 hover:bg-blue-100 rounded px-2 py-1 transition">Resources</a>
+                <a href="{% url 'landing' %}" class="text-blue-600 font-medium hover:text-blue-800 hover:bg-blue-100 rounded px-2 py-1 transition">Home</a>
+                <a href="{% url 'about' %}" class="text-blue-600 font-medium hover:text-blue-800 hover:bg-blue-100 rounded px-2 py-1 transition">About</a>
                 <a href="{% url 'login' %}" class="bg-blue-600 text-white font-semibold rounded-lg px-4 py-2 hover:bg-blue-700 transition duration-300 shadow-md">Jadwal</a>
             </div>
 

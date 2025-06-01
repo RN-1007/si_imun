@@ -4,42 +4,81 @@
     <meta charset="UTF-8">
     <title>Tambah Jadwal Imunisasi</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            background: linear-gradient(135deg, #38bdf8 0%, #06b6d4 100%);
+            min-height: 100vh;
+            position: relative;
+            overflow: hidden;
+        }
+        .bubble {
+            position: absolute;
+            border-radius: 9999px;
+            opacity: 0.3;
+            animation: bubbleUp 3s linear infinite;
+        }
+        @keyframes bubbleUp {
+            0% {
+                transform: translateY(100vh) scale(1);
+                opacity: 0.3;
+            }
+            80% {
+                opacity: 0.4;
+            }
+            100% {
+                transform: translateY(-10vh) scale(1.2);
+                opacity: 0;
+            }
+        }
+    </style>
 </head>
-<body class="bg-blue-50 min-h-screen py-10">
-    <div class="max-w-xl mx-auto bg-white p-8 rounded shadow">
-        <h2 class="text-2xl font-bold mb-6">Tambah Jadwal Imunisasi</h2>
+<body class="min-h-screen flex items-center justify-center relative">
 
-        <form method="post" class="space-y-4">
+    <!-- Animated Bubbles Background -->
+    <div class="pointer-events-none select-none">
+        <div class="bubble" style="left:12%; width:60px; height:60px; background:#fff; animation-delay:0s;"></div>
+        <div class="bubble" style="left:28%; width:40px; height:40px; background:#e0f2fe; animation-delay:2s;"></div>
+        <div class="bubble" style="left:52%; width:80px; height:80px; background:#bae6fd; animation-delay:4s;"></div>
+        <div class="bubble" style="left:68%; width:50px; height:50px; background:#fff; animation-delay:1s;"></div>
+        <div class="bubble" style="left:85%; width:30px; height:30px; background:#e0f2fe; animation-delay:3s;"></div>
+    </div>
+
+    <!-- Overlay -->
+    <div class="absolute inset-0 bg-blue-900/40 backdrop-blur-sm z-0"></div>
+
+    <div class="relative z-10 w-full max-w-xl mx-auto bg-white/90 p-10 rounded-2xl shadow-2xl border border-blue-100">
+        <h2 class="text-3xl font-extrabold text-blue-700 mb-8 text-center drop-shadow">Tambah Jadwal Imunisasi</h2>
+
+        <form method="post" class="space-y-6">
             {% csrf_token %}
 
-
             <div>
-                <label for="jenis_imunisasi" class="block text-sm font-medium text-gray-700">Jenis Imunisasi</label>
+                <label for="jenis_imunisasi" class="block text-sm font-semibold text-gray-700 mb-1">Jenis Imunisasi</label>
                 <input type="text" name="jenis_imunisasi" id="jenis_imunisasi"
                        value="{{ form.jenis_imunisasi.value|default_if_none:'' }}"
-                       class="w-full px-4 py-2 border rounded focus:ring focus:ring-blue-200">
+                       class="w-full px-4 py-2 border border-blue-200 rounded-lg shadow-sm focus:ring focus:ring-blue-200 focus:outline-none bg-blue-50/50 transition">
             </div>
 
             <div>
-                <label for="tanggal" class="block text-sm font-medium text-gray-700">Tanggal</label>
+                <label for="tanggal" class="block text-sm font-semibold text-gray-700 mb-1">Tanggal</label>
                 <input type="date" name="tanggal" id="tanggal"
                        value="{{ form.tanggal.value|default_if_none:'' }}"
-                       class="w-full px-4 py-2 border rounded focus:ring focus:ring-blue-200">
+                       class="w-full px-4 py-2 border border-blue-200 rounded-lg shadow-sm focus:ring focus:ring-blue-200 focus:outline-none bg-blue-50/50 transition">
             </div>
 
             <div>
-                <label for="keterangan" class="block text-sm font-medium text-gray-700">Keterangan</label>
+                <label for="keterangan" class="block text-sm font-semibold text-gray-700 mb-1">Keterangan</label>
                 <textarea name="keterangan" id="keterangan" rows="3"
-                          class="w-full px-4 py-2 border rounded focus:ring focus:ring-blue-200">{{ form.keterangan.value|default_if_none:'' }}</textarea>
+                          class="w-full px-4 py-2 border border-blue-200 rounded-lg shadow-sm focus:ring focus:ring-blue-200 focus:outline-none bg-blue-50/50 transition">{{ form.keterangan.value|default_if_none:'' }}</textarea>
             </div>
 
-            <div class="flex justify-end space-x-2">
+            <div class="flex justify-end space-x-2 pt-2">
                 <a href="{% url 'dashboard' %}" 
-                   class="bg-gray-300 text-gray-700 px-4 py-2 rounded hover:bg-gray-400 transition">
+                   class="bg-gray-100 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-200 transition shadow text-sm">
                     Batal
                 </a>
                 <button type="submit"
-                        class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition">
+                        class="bg-gradient-to-r from-blue-600 to-cyan-500 text-white px-6 py-2 rounded-lg font-bold shadow hover:from-blue-700 hover:to-cyan-600 transition">
                     Simpan
                 </button>
             </div>

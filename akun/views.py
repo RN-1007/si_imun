@@ -20,6 +20,9 @@ User = get_user_model()
 def landing_view(request):
     return render(request,'landing_page/index.html')   
 
+def about_view(request):
+    return render(request,'landing_page/about.html')   
+
 def login_view(request):
     if request.method == 'POST':
         username = request.POST['username']
